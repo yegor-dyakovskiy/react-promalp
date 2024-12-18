@@ -1,0 +1,53 @@
+.banner {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.493) 27%, rgba(255, 255, 255, 0) 35%),
+        url('../../assets/img/main-banner.webp');
+    background-size: cover;
+    background-position: 10% 5%;
+    width: 100vw;
+    height: 100vh;
+    max-height: 800px;
+    background-repeat: no-repeat;
+    padding: 17rem 0 220px 17rem;
+    object-fit: cover;
+}
+.banner__title {
+    font-family: 'Exo 2';
+    font-size: 5rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 4rem;
+}
+.banner__subtitle {
+    font-family: 'Exo 2';
+    font-size: 3.4rem;
+    font-weight: 500;
+    color: var(--main-color);
+    margin-bottom: 10rem;
+}
+.banner__button {
+    text-decoration: none;
+    padding: 2.5rem 5rem;
+    font-family: 'Exo 2';
+    font-size: 2.4rem;
+    font-weight: 600;
+    border-radius: 10px;
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 600px) {
+    .banner {
+        padding: 2rem 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .banner__title {
+        font-size: 3.8rem;
+        margin-bottom: 2rem;
+    }
+    .banner__subtitle {
+        font-size: 2.8rem;
+        margin-bottom: 5rem;
+    }
+}

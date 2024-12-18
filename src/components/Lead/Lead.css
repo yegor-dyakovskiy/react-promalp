@@ -1,0 +1,70 @@
+.lead {
+    background: var(--main-color);
+    padding: 9rem 35rem 13rem 35rem;
+}
+.lead__title {
+    font-family: 'Exo 2';
+    font-size: 5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6rem;
+    text-align: center;
+}
+.lead__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
+}
+.lead__form-input {
+    background: #fff;
+    border: none;
+    padding: 2.5rem 3rem 1.8rem 3rem;
+    border-radius: 10px;
+    width: 38rem;
+    height: 7rem;
+}
+.lead__form-button {
+    width: 38rem;
+    height: 7rem;
+    border-radius: 10px;
+    background: var(--secondary-color);
+    color: var(--main-color);
+    font-family: 'Exo 2';
+    font-size: 2.4rem;
+    font-weight: 600;
+    padding: 1.5rem 3rem;
+}
+.lead__form-input::placeholder {
+    color: #7b7b7b;
+    font-family: 'Exo 2';
+    font-size: 2rem;
+}
+.lead__form-input--error {
+    border: 4px solid rgb(195, 65, 65);
+    border-color: rgb(195, 65, 65);
+}
+
+@media (max-width: 900px) {
+    .lead__form {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .lead {
+        padding: 2rem 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .banner__title {
+        font-size: 3.8rem;
+        margin-bottom: 2rem;
+    }
+    .banner__subtitle {
+        font-size: 2.8rem;
+        margin-bottom: 5rem;
+    }
+}

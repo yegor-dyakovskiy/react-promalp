@@ -1,0 +1,25 @@
+.cards__card {
+    height: auto;
+    width: 30%;
+}
+.cards__card-img {
+    width: 100%;
+    height: 100%;
+    max-height: 325px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: -2px;
+}
+.cards__card-name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.2rem 0;
+    font-family: 'Exo 2';
+    font-size: 2.2rem;
+    font-weight: 400;
+    border-radius: 0 0 10px 10px;
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+}

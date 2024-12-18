@@ -1,0 +1,30 @@
+.cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5.5% 7.5%;
+}
+.cards__title {
+    font-family: 'Exo 2';
+    font-size: 5rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 8rem;
+}
+
+.cards__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10rem;
+    column-gap: 7rem;
+    margin-bottom: 10rem;
+}
+.cards__text {
+    font-family: 'Exo 2';
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--main-color);
+    border: none;
+    background: #fff;
+}

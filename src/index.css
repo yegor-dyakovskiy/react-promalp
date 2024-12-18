@@ -1,0 +1,32 @@
+@import './assets/fonts/exo2/stylesheet.css';
+@import './assets/fonts/montserrat/stylesheet.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 10px; /* Размер по умолчанию */
+}
+body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 1400px) {
+    html {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 1100px) {
+    html {
+        font-size: 8px;
+    }
+}
+:root {
+    --main-color: #002d5a;
+    --secondary-color: #f47b1e;
+    --black: #000000;
+    --white: #ffffff;
+}
