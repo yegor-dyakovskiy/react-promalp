@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Lead.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Подключаем стили для AOS
 
 function Lead() {
     // Состояния для значений формы
@@ -82,41 +80,25 @@ function Lead() {
         }
     };
 
-    // Инициализация AOS
-    useEffect(() => {
-        AOS.init({
-            duration: 1000, // Длительность анимации
-            easing: 'ease-out', // Плавность анимации
-            once: true, // Анимация будет выполнена один раз
-        });
-    }, []);
-
     return (
         <section className="lead">
-            <h2 className="lead__title" data-aos="fade-up">
-                Получите бесплатную консультацию
-            </h2>
+            <h2 className="lead__title">Получите бесплатную консультацию</h2>
             <form onSubmit={handleSubmit} className="lead__form">
-                <div className="lead__form-group">
-                    <input
-                        placeholder="Ваше имя"
-                        className={`lead__form-input ${nameError ? 'lead__form-input--error' : ''}`}
-                        type="text"
-                        value={name}
-                        onChange={handleNameChange}
-                    />
-                </div>
-                <div className="lead__form-group">
-                    <input
-                        placeholder="Телефон"
-                        className={`lead__form-input ${
-                            phoneError ? 'lead__form-input--error' : ''
-                        }`}
-                        type="tel"
-                        value={phone}
-                        onChange={handlePhoneChange}
-                    />
-                </div>
+                <input
+                    placeholder="Ваше имя"
+                    className={`lead__form-input ${nameError ? 'lead__form-input--error' : ''}`}
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                />
+
+                <input
+                    placeholder="Телефон"
+                    className={`lead__form-input ${phoneError ? 'lead__form-input--error' : ''}`}
+                    type="tel"
+                    value={phone}
+                    onChange={handlePhoneChange}
+                />
                 <input className="lead__form-button" type="submit" value="Заказать звонок" />
             </form>
         </section>

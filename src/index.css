@@ -24,6 +24,11 @@ body {
         font-size: 8px;
     }
 }
+@media (max-width: 600px) {
+    html {
+        font-size: 7px;
+    }
+}
 :root {
     --main-color: #002d5a;
     --secondary-color: #f47b1e;

@@ -1,0 +1,47 @@
+.callme {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366; /* Цвет WhatsApp */
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Чтобы кнопка была поверх всех элементов */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: blink-scale 2s infinite; /* Добавляем анимацию */
+    cursor: pointer;
+}
+
+.callme:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.callme img {
+    width: 85%; /* Размер иконки внутри */
+    height: auto;
+}
+@media (max-width: 900px) {
+    .callme {
+        width: 50px;
+        height: 50px;
+    }
+}
+/* Анимация мерцания и масштабирования */
+@keyframes blink-scale {
+    0%,
+    100% {
+        transform: scale(1); /* Обычный размер */
+    }
+    50% {
+        transform: scale(1.05); /* Увеличение */
+    }
+    25%,
+    75% {
+        transform: scale(0.9); /* Уменьшение */
+    }
+}

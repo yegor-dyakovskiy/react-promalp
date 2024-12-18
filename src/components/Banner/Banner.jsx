@@ -24,8 +24,8 @@ function Banner() {
                 альпинизм в Алматы
             </h1>
             <h2 className="banner__subtitle" data-aos="fade-left">
-                Опытные специалисты для монтажа, <br />
-                обслуживания и ремонта на высоте
+                Опытные специалисты <br className="display_block_br" /> для монтажа, <br />
+                обслуживания и ремонта <br className="display_block_br" /> на высоте
             </h2>
             <a className="banner__button" href={whatsappLink} data-aos="zoom-in">
                 Бесплатная консультация
