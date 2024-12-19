@@ -3,15 +3,15 @@ import Card from '../Card/Card.jsx';
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Подключаем стили для AOS
-import service10 from "../../assets/img/service-10.webp";
-import service1 from "../../assets/img/service-1.webp";
-import service2 from "../../assets/img/service-2.webp";
-import service3 from "../../assets/img/service-3.webp";
-import service4 from "../../assets/img/service-4.webp";
-import service5 from "../../assets/img/service-5.webp";
-import service6 from "../../assets/img/service-6.webp";
-import service8 from "../../assets/img/service-8.webp";
-import service9 from "../../assets/img/service-9.webp";
+import service10 from '../../assets/img/service-10.webp';
+import service1 from '../../assets/img/service-1.webp';
+import service2 from '../../assets/img/service-2.webp';
+import service3 from '../../assets/img/service-3.webp';
+import service4 from '../../assets/img/service-4.webp';
+import service5 from '../../assets/img/service-5.webp';
+import service6 from '../../assets/img/service-6.webp';
+import service8 from '../../assets/img/service-8.webp';
+import service9 from '../../assets/img/service-9.webp';
 
 const cardsData = [
     { id: 1, imgPath: service10, title: 'Мойка окон' },
@@ -30,42 +30,89 @@ const cardsData = [
     { id: 14, imgPath: service1, title: 'Новая услуга 5' },
 ];
 
-
 function Cards() {
-    // Состояние для отображаемых карточек
-    const [visibleCards, setVisibleCards] = useState(9);
+    const [currentIndex, setCurrentIndex] = useState(0); // Индекс слайда
+    const [isMobile, setIsMobile] = useState(false); // Состояние для проверки мобильного устройства
+    const displayCount = 1; // Количество карточек на одном слайде
+    const images = cardsData; // Данные для слайдера
 
-    // Инициализация AOS
     useEffect(() => {
+        // Инициализация AOS
         AOS.init({
-            duration: 1000, // Длительность анимации
-            easing: 'ease-out', // Плавность анимации
-            once: true, // Анимация будет выполнена один раз
+            duration: 1000,
+            easing: 'ease-out',
+            once: true,
         });
+
+        // Функция для обновления состояния isMobile при изменении ширины окна
+        const handleResize = () => {
+            if (window.innerWidth <= 1000) {
+                setIsMobile(true); // Включаем слайдер на мобильных устройствах
+            } else {
+                setIsMobile(false); // Отключаем слайдер на больших экранах
+            }
+        };
+
+        // Добавляем слушатель события resize
+        window.addEventListener('resize', handleResize);
+
+        // Проверяем размер окна при первоначальной загрузке
+        handleResize();
+
+        // Убираем слушатель при размонтировании компонента
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
-    // Функция для обработки клика на кнопку
-    const handleShowMore = () => {
-        setVisibleCards((prevVisible) => prevVisible + 9); // Показываем ещё 9 карточек
+    // Функция для обновления слайдера
+    const updateSlider = () => {
+        return images.slice(currentIndex, currentIndex + displayCount);
+    };
+
+    // Обработчик кнопки "влево"
+    const leftButton = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
+
+    // Обработчик кнопки "вправо"
+    const rightButton = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
 
     return (
         <section className="cards">
             <h2 className="cards__title">Наши услуги</h2>
             <div className="cards__box">
-                {cardsData.slice(0, visibleCards).map((card) => (
-                    <Card
-                        key={card.id}
-                        imgPath={card.imgPath}
-                        title={card.title}
-                        aosAnimation="fade-up" // Передаем анимацию через пропс
-                    />
-                ))}
+                {isMobile
+                    ? // Для мобильных устройств показываем только слайдер
+                      updateSlider().map((card) => (
+                          <Card
+                              key={card.id}
+                              imgPath={card.imgPath}
+                              title={card.title}
+                              data-aos="fade-up" // Добавляем анимацию для карточек на мобильных устройствах
+                          />
+                      ))
+                    : // Для больших экранов показываем все карточки
+                      cardsData.map((card) => (
+                          <Card
+                              key={card.id}
+                              imgPath={card.imgPath}
+                              title={card.title}
+                              data-aos="fade-up" // Добавляем анимацию для всех карточек на больших экранах
+                          />
+                      ))}
             </div>
-            {visibleCards < cardsData.length && (
-                <button className="cards__text" onClick={handleShowMore}>
-                    Весь список услуг &gt;&gt;&gt;
-                </button>
+            {isMobile && (
+                <div className="slider-buttons">
+                    <button className="service__buttons_3row-left" onClick={leftButton}>
+                        ←НАЛЕВО
+                    </button>
+                    <button className="service__buttons_3row-right" onClick={rightButton}>
+                        НАПРАВО→
+                    </button>
+                </div>
             )}
         </section>
     );

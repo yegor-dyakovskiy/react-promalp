@@ -16,8 +16,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    column-gap: 2rem;
     row-gap: 4rem;
-    column-gap: 4%;
     margin-bottom: 5.5%;
 }
 .cards__text {
