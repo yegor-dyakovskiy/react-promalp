@@ -1,6 +1,6 @@
 .lead {
     background: var(--main-color);
-    padding: 9rem 35rem 13rem 35rem;
+    padding: 5% 10% 5% 10%;
 }
 .lead__title {
     font-family: 'Exo 2';
@@ -51,15 +51,21 @@
     border-color: rgb(195, 65, 65);
 }
 
+@media (max-width: 1500px) {
+}
 @media (max-width: 900px) {
     .lead__form {
         flex-wrap: wrap;
+    }
+    .lead__form-input,
+    .lead__form-button {
+        width: 100%;
     }
 }
 
 @media (max-width: 600px) {
     .lead {
-        padding: 2rem 3rem;
+        padding: 4rem 3rem;
         display: flex;
         flex-direction: column;
         align-items: center;
