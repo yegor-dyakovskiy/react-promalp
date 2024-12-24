@@ -1,8 +1,11 @@
 import './Cards.css';
 import Card from '../Card/Card.jsx';
-import { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Подключаем стили для AOS
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Keyboard, Pagination, Navigation, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css'; // Подключаем базовые стили Swiper
+import 'swiper/css/navigation';  // Для стилей навигации
+import 'swiper/css/pagination';  // Для стилей пагинации
+import 'swiper/css/effect-coverflow'; // Для стилей эффекта Coverflow
 import service10 from '../../assets/img/service-10.webp';
 import service1 from '../../assets/img/service-1.webp';
 import service2 from '../../assets/img/service-2.webp';
@@ -14,106 +17,74 @@ import service8 from '../../assets/img/service-8.webp';
 import service9 from '../../assets/img/service-9.webp';
 
 const cardsData = [
-    { id: 1, imgPath: service10, title: 'Мойка окон' },
-    { id: 2, imgPath: service1, title: 'Монтаж рекламной конструкции' },
-    { id: 3, imgPath: service2, title: 'Монтаж греющего кабеля' },
-    { id: 4, imgPath: service3, title: 'Покраска крыши дома' },
-    { id: 5, imgPath: service4, title: 'Фото и видеосъёмка' },
-    { id: 6, imgPath: service5, title: 'Покраска фасада' },
-    { id: 7, imgPath: service6, title: 'Штукатурка фасада' },
-    { id: 8, imgPath: service8, title: 'Обслуживание систем освещения' },
-    { id: 9, imgPath: service9, title: 'Покраска крыши дома' },
-    { id: 10, imgPath: service1, title: 'Новая услуга 1' },
-    { id: 11, imgPath: service1, title: 'Новая услуга 2' },
-    { id: 12, imgPath: service1, title: 'Новая услуга 3' },
-    { id: 13, imgPath: service1, title: 'Новая услуга 4' },
-    { id: 14, imgPath: service1, title: 'Новая услуга 5' },
+    { id: 1, imgPath: service10, title: 'Мойка окон', aosAnimation: 'fade-up' },
+    { id: 2, imgPath: service1, title: 'Монтаж рекламной конструкции', aosAnimation: 'fade-up' },
+    { id: 3, imgPath: service2, title: 'Монтаж греющего кабеля', aosAnimation: 'fade-up' },
+    { id: 4, imgPath: service3, title: 'Покраска крыши дома', aosAnimation: 'fade-up' },
+    { id: 5, imgPath: service4, title: 'Фото и видеосъёмка', aosAnimation: 'fade-up' },
+    { id: 6, imgPath: service5, title: 'Покраска фасада', aosAnimation: 'fade-up' },
+    { id: 7, imgPath: service6, title: 'Штукатурка фасада', aosAnimation: 'fade-up' },
+    { id: 8, imgPath: service8, title: 'Обслуживание систем освещения', aosAnimation: 'fade-up' },
+    { id: 9, imgPath: service9, title: 'Покраска крыши дома', aosAnimation: 'fade-up' },
+    { id: 10, imgPath: service1, title: 'Новая услуга 1', aosAnimation: 'fade-up' },
+    { id: 11, imgPath: service1, title: 'Новая услуга 2', aosAnimation: 'fade-up' },
+    { id: 12, imgPath: service1, title: 'Новая услуга 3', aosAnimation: 'fade-up' },
+    { id: 13, imgPath: service1, title: 'Новая услуга 4', aosAnimation: 'fade-up' },
+    { id: 14, imgPath: service1, title: 'Новая услуга 5', aosAnimation: 'fade-up' },
 ];
 
 function Cards() {
-    const [currentIndex, setCurrentIndex] = useState(0); // Индекс слайда
-    const [isMobile, setIsMobile] = useState(false); // Состояние для проверки мобильного устройства
-    const displayCount = 1; // Количество карточек на одном слайде
-    const images = cardsData; // Данные для слайдера
-
-    useEffect(() => {
-        // Инициализация AOS
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-out',
-            once: true,
-        });
-
-        // Функция для обновления состояния isMobile при изменении ширины окна
-        const handleResize = () => {
-            if (window.innerWidth <= 1000) {
-                setIsMobile(true); // Включаем слайдер на мобильных устройствах
-            } else {
-                setIsMobile(false); // Отключаем слайдер на больших экранах
-            }
-        };
-
-        // Добавляем слушатель события resize
-        window.addEventListener('resize', handleResize);
-
-        // Проверяем размер окна при первоначальной загрузке
-        handleResize();
-
-        // Убираем слушатель при размонтировании компонента
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    // Функция для обновления слайдера
-    const updateSlider = () => {
-        return images.slice(currentIndex, currentIndex + displayCount);
-    };
-
-    // Обработчик кнопки "влево"
-    const leftButton = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
-    // Обработчик кнопки "вправо"
-    const rightButton = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
-
     return (
-        <section className="cards">
-            <h2 className="cards__title">Наши услуги</h2>
-            <div className="cards__box">
-                {isMobile
-                    ? // Для мобильных устройств показываем только слайдер
-                      updateSlider().map((card) => (
-                          <Card
-                              key={card.id}
-                              imgPath={card.imgPath}
-                              title={card.title}
-                              data-aos="fade-up" // Добавляем анимацию для карточек на мобильных устройствах
-                          />
-                      ))
-                    : // Для больших экранов показываем все карточки
-                      cardsData.map((card) => (
-                          <Card
-                              key={card.id}
-                              imgPath={card.imgPath}
-                              title={card.title}
-                              data-aos="fade-up" // Добавляем анимацию для всех карточек на больших экранах
-                          />
-                      ))}
-            </div>
-            {isMobile && (
-                <div className="slider-buttons">
-                    <button className="service__buttons_3row-left" onClick={leftButton}>
-                        ←НАЛЕВО
-                    </button>
-                    <button className="service__buttons_3row-right" onClick={rightButton}>
-                        НАПРАВО→
-                    </button>
-                </div>
-            )}
+        <section className='cards__swiper'>
+           <Swiper
+    modules={[Keyboard, Pagination, Navigation, EffectCoverflow]}  // Подключаем модули
+    keyboard={{ enabled: true }}  // Включаем управление клавиатурой
+    spaceBetween={50}
+    loop={true} 
+    pagination={{
+        clickable: true,  // Включаем возможность клика по пагинации
+        el: '.swiper-pagination',  // Контейнер для пагинации
+    }}
+    navigation={{
+        nextEl: '.swiper-button-next',  // Кнопка "следующий"
+        prevEl: '.swiper-button-prev',  // Кнопка "предыдущий"
+    }}
+    effect="coverflow"  // Активируем эффект Coverflow
+    coverflowEffect={{
+        rotate: 5,
+        stretch: 0,
+        depth: 120,
+        modifier: 1,
+        slideShadows: false,
+    }}
+    breakpoints={{
+        // Когда экран больше 1200px
+        1200: {
+            slidesPerView: 3,  // Показываем 3 карточки
+        },
+        // Когда экран от 900px до 1199px
+        900: {
+            slidesPerView: 2,  // Показываем 2 карточки
+        },
+        // Когда экран меньше 900px
+        0: {
+            slidesPerView: 1,  // Показываем 1 карточку
+        },
+    }}
+>
+    {cardsData.map((card) => (
+        <SwiperSlide key={card.id}>
+            <Card
+                imgPath={card.imgPath}
+                title={card.title}
+            />
+        </SwiperSlide>
+    ))}
+</Swiper>
+
+            <div className="swiper-pagination"></div>
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
         </section>
     );
 }

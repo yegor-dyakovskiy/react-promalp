@@ -12,14 +12,22 @@
     margin-bottom: 4%;
 }
 
-.cards__box {
+/* .cards__box {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 2rem;
     row-gap: 4rem;
     margin-bottom: 5.5%;
-}
+    min-width: 0;
+} */
+ .cards__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 20px;
+ }
 .cards__text {
     font-family: 'Exo 2';
     font-size: 2.4rem;
@@ -51,4 +59,38 @@
     .cards__title {
         margin-bottom: 30px;
     }
+}
+.cards__swiper {
+    display: flex;
+    justify-content: center;
+    padding: 30px 60px;
+    min-width: 0;
+    height: 100%;
+    min-height: 400px;
+    position: relative; /* Для позиционирования пагинации и кнопок навигации */
+    overflow: hidden; /* Чтобы элементы не выходили за пределы контейнера */
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%); /* Центрируем пагинацию по горизонтали */
+    z-index: 10; /* Убедитесь, что пагинация поверх других элементов */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.swiper-button-next {
+    right: 10px; /* Расположим кнопку "Следующий" справа */
+}
+
+.swiper-button-prev {
+    left: 10px; /* Расположим кнопку "Предыдущий" слева */
 }
