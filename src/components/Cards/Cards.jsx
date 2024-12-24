@@ -29,12 +29,13 @@ const cardsData = [
     { id: 13, imgPath: service1, title: 'Новая услуга 4' },
     { id: 14, imgPath: service1, title: 'Новая услуга 5' },
 ];
-
 function Cards() {
     const [currentIndex, setCurrentIndex] = useState(0); // Индекс слайда
     const [isMobile, setIsMobile] = useState(false); // Состояние для проверки мобильного устройства
     const displayCount = 1; // Количество карточек на одном слайде
     const images = cardsData; // Данные для слайдера
+    const [touchStartX, setTouchStartX] = useState(0); // Начальная позиция свайпа
+    const [touchEndX, setTouchEndX] = useState(0); // Конечная позиция свайпа
 
     useEffect(() => {
         // Инициализация AOS
@@ -46,7 +47,7 @@ function Cards() {
 
         // Функция для обновления состояния isMobile при изменении ширины окна
         const handleResize = () => {
-            if (window.innerWidth <= 1000) {
+            if (window.innerWidth <= 740) {
                 setIsMobile(true); // Включаем слайдер на мобильных устройствах
             } else {
                 setIsMobile(false); // Отключаем слайдер на больших экранах
@@ -80,10 +81,33 @@ function Cards() {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
 
+    // Обработчик начала свайпа
+    const handleTouchStart = (e) => {
+        setTouchStartX(e.touches[0].clientX); // Сохраняем начальную позицию свайпа
+    };
+
+    // Обработчик завершения свайпа
+    const handleTouchEnd = (e) => {
+        setTouchEndX(e.changedTouches[0].clientX); // Сохраняем конечную позицию свайпа
+
+        // Определяем направление свайпа
+        if (touchStartX - touchEndX > 50) {
+            // Свайп влево
+            rightButton();
+        } else if (touchEndX - touchStartX > 50) {
+            // Свайп вправо
+            leftButton();
+        }
+    };
+
     return (
-        <section className="cards">
+        <section id="services" className="cards">
             <h2 className="cards__title">Наши услуги</h2>
-            <div className="cards__box">
+            <div
+                className="cards__box"
+                onTouchStart={isMobile ? handleTouchStart : null} // Добавляем обработчик свайпа
+                onTouchEnd={isMobile ? handleTouchEnd : null} // Добавляем обработчик свайпа
+            >
                 {isMobile
                     ? // Для мобильных устройств показываем только слайдер
                       updateSlider().map((card) => (
@@ -107,10 +131,10 @@ function Cards() {
             {isMobile && (
                 <div className="slider-buttons">
                     <button className="service__buttons_3row-left" onClick={leftButton}>
-                        ←НАЛЕВО
+                        &gt;
                     </button>
                     <button className="service__buttons_3row-right" onClick={rightButton}>
-                        НАПРАВО→
+                        &gt;
                     </button>
                 </div>
             )}

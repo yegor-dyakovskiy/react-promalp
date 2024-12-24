@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import Header from './components/Header/Header';
+/* import Header from './components/Header/Header';
 import Banner from './components/Banner/Banner';
 import Cards from './components/Cards/Cards';
 import Lead from './components/Lead/Lead';
-import Callme from './components/Callme/Callme';
+import Callme from './components/Callme/Callme'; */
+import About from './components/Contacts/About';
 
 function App() {
     // Настраиваем анимацию для секций
@@ -14,7 +15,7 @@ function App() {
 
     return (
         <>
-            <motion.div
+            {/*    <motion.div
                 variants={sectionVariants}
                 initial="hidden"
                 animate="visible"
@@ -29,8 +30,16 @@ function App() {
                 transition={{ duration: 0.6, delay: 0.3 }}
             >
                 <Banner />
-            </motion.div>
+            </motion.div> */}
             <motion.div
+                variants={sectionVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.6, delay: 0.6 }}
+            >
+                <About />
+            </motion.div>
+            {/*  <motion.div
                 variants={sectionVariants}
                 initial="hidden"
                 animate="visible"
@@ -54,7 +63,7 @@ function App() {
             >
                 <Header />
             </motion.div>
-            <Callme />
+            <Callme /> */}
         </>
     );
 }

@@ -7,10 +7,13 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 export default [
     { ignores: ['dist'] },
     {
-        files: ['**/*.{js,jsx}'],
+        files: ['**/*.{js,jsx,css}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser,
+            globals: {
+                ...globals.browser,
+                module: 'readonly', // Для Node.js
+            },
             parserOptions: {
                 ecmaVersion: 'latest',
                 ecmaFeatures: { jsx: true },
@@ -30,7 +33,7 @@ export default [
             ...reactHooks.configs.recommended.rules,
             'react/jsx-no-target-blank': 'off',
             'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-            'react/prop-types': 'off', // Добавлено правило для отключения проверки PropTypes
+            'react/prop-types': 'off',
         },
     },
 ];

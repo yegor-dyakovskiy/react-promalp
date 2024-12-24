@@ -17,12 +17,12 @@ function Header() {
                 </div>
                 <ul className="nav__menu">
                     <li className="nav__menu-item">
-                        <a className="nav__menu-link" href="#">
+                        <a className="nav__menu-link" href="#about">
                             О нас
                         </a>
                     </li>
                     <li className="nav__menu-item">
-                        <a className="nav__menu-link" href="#">
+                        <a className="nav__menu-link" href="#services">
                             Услуги
                         </a>
                     </li>
