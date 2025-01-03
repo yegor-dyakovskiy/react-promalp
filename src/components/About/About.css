@@ -1,0 +1,72 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    padding: 5.5% 7.5%;
+}
+.about__title {
+    font-family: 'Exo 2';
+    font-size: 5rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 4vw;
+    text-align: center;
+}
+.about__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3%;
+}
+/* .about__img {
+    object-fit: cover;
+    max-width: 100%; 
+    height: auto;
+    max-height: 451px;
+    object-position: 80% center;
+} */
+
+.about__img {
+    background: url('../../assets/img/about.webp');
+    background-position: 90% center;
+    background-size: cover;
+    width: 100vw;
+    max-width: 749px;
+    height: 100vh;
+    max-height: 451px;
+    border-radius: 10px;
+}
+.about__article {
+    font-family: 'Exo 2';
+    font-size: 3.4rem;
+    font-weight: 400;
+    color: var(--main-color);
+    max-width: 810px;
+}
+.about__article ul {
+    padding-left: 5%;
+}
+@media (max-width: 1140px) {
+    .about {
+        padding: 3% 5%;
+    }
+    .about__container {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 3vh;
+        width: 100%;
+    }
+    .about__article {
+        max-width: 749px;
+    }
+}
+@media (max-width: 900px) {
+    .about__img {
+        width: 90vw;
+        background-position: 70% center;
+    }
+}
+
+@media (max-width: 500px) {
+    .about__article {
+        font-size: 2.4rem;
+    }
+}
