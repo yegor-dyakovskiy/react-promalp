@@ -37,6 +37,7 @@
     padding: 1.5rem 3rem;
     cursor: pointer;
     transition: all 0.5s;
+    border: none;
 }
 .lead__form-button:hover {
     color: var(--white);
