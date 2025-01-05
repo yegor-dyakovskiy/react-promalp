@@ -5,6 +5,7 @@ import Cards from './components/Cards/Cards';
 import Lead from './components/Lead/Lead';
 import Callme from './components/Callme/Callme';
 import About from './components/About/About';
+import Advantages from './components/Advantages/Advantages';
 
 function App() {
     // Настраиваем анимацию для секций
@@ -38,6 +39,14 @@ function App() {
                 transition={{ duration: 0.6, delay: 0.6 }}
             >
                 <About />
+            </motion.div>
+            <motion.div
+                variants={sectionVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.6, delay: 0.6 }}
+            >
+                <Advantages />
             </motion.div>
             <motion.div
                 variants={sectionVariants}
